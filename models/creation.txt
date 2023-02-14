@@ -1,0 +1,81 @@
+Nom de l'applicaiton ? 
+
+I)
+1- Création du profil 
+
+II) Les règles du jeu 
+
+1-présentation 
+2-préparation 
+3-discussion 
+4-To-try (plus tard)
+
+III) Le jeu 
+
+1-Création des participants 2 mini (choix du speudo, choix du sexe,(choix de l'orientation sexuelle ?)) OPTIONS = ajouts d'un ou plusieurs personnes, modification de profil joueurs et suppressions. 
+
+2-Les joueurs joue une carte à tour de rôle de manières aléatoire sur une base de cartes déjà existantes "les cartes discussions". OPTIONS = 
+    - Possiblité de choisir le jeu de base.  
+    - Possiblité de jouer le jeu de base +/ou ses cartes personnalisées +/ou les cartes de la communauté. 
+
+-Carte "Vierge" possibilité d'ajouter une carte "Vierge" sur laquelle on écrit une question issu de notre propre imagination ⚠"Gestion des conneries". OPTIONS = 
+    -Sauvegardé la carte est diponible dans la pioche personnalisée (patager ou non sa base de carte avec la communauté) = OPTIONS
+        -Possiblité de signaler une carte avec plusieurs options de "raisons"  
+
+
+-Carte "Joker" 2 cartes "Joker par joueurs distribué au début de la partie. Carte qui sert a passer outre la question "Je préfère le garder pour moi" 
+-Carte "Gourmandise" 1 Carte "Gourmandise" par joueur distribué au début de la partie, "dis-m'en plus...".
+
+-Partie libre dans le temps à la cool. OPTIONS = 
+    -Simple de temps allant de 30" à 1' par carte. 
+
+organistations back-end. 
+
+Collecions 
+
+users {
+    _id : objectID,
+    email :{type:String, unique:true, required:true},
+    password:{type :String, required:true},
+    lastName :String, 
+    firstName: String,  
+    age: Number, => (>=18ans sinon reffusé l'accès à l'application.)
+}
+
+Cards {
+    _id : objectID, 
+    content: [
+        {
+            question: {type:String, required:true},   
+            detail: String, 
+            number : Number,
+            type : String,
+            author : _id
+        }
+    ]
+}
+
+Controllers
+
+    usersControllers 
+
+        const createProfil -> router.post("/profile", usersControllers.createProfil);
+             
+        const login -> router.post("/login", usersControllers.login);
+
+        const consultProfile -> router.get("/profile", usersControllers.consultProfile);  
+
+        const modificationProfil -> router.put("/profile", usersControllers.modificationProfil);
+
+        const deleteProfile -> router.delete("/profile", usersControllers.deleteProfile); 
+
+    cardsControllers    
+
+        const createCards -> router.post("/cards", cardsControllers.createCards); 
+        
+        const getReadingCards -> router.get("/cards/:mode", cardsControllers, getReadingCards); 
+
+        const modificationCards -> router.put("/cards", cardsControllers, modificationCards);
+
+        const deleteCardsAdmin -> router.delete("/cards, cardsControllers, deleteCards); 
+
